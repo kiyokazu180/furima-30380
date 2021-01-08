@@ -29,10 +29,12 @@
 |wait_days  |string     |not:null                                 |
 |value      |integer    |not:null                                 |
 |user       |references |foreign_key :true                        |
+|buy_record |references |foreign_key :true                        |
 
 ### Associations
     belongs_to :user
-    belongs_to :buy_record
+    has_one    :buy_record
+    
 ## Addresses
 |Column       |Type       |Options                                  |
 |-------------|-----------|-----------------------------------------|
