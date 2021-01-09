@@ -34,7 +34,7 @@
 ### Associations
     belongs_to :user
     has_one    :buy_record
-    
+
 ## Addresses
 |Column       |Type       |Options                                  |
 |-------------|-----------|-----------------------------------------|
@@ -57,7 +57,6 @@
 |user         |references |foreign_key :true                        |
 
 ### Associations
-    belongs_to :address
     belongs_to :item
     belongs_to :user
     has_one    :address
