@@ -16,18 +16,17 @@
     has_many :buy_records
 
 ## Items
-|Column     |Type       |Options                                  |
-|-----------|-----------|-----------------------------------------|
-|name       |string     |not:null                                 |
-|explanation|text       |not:null                                 |
-|category   |string     |not:null                                 |
-|state      |string     |not:null                                 |
-|send_fee   |integer    |not:null                                 |
-|region     |string     |not:null                                 |
-|wait_days  |string     |not:null                                 |
-|value      |integer    |not:null                                 |
-|user       |references |foreign_key :true                        |
-|buy_record |references |foreign_key :true                        |
+|Column      |Type       |Options                                  |
+|----------- |-----------|-----------------------------------------|
+|name        |string     |not:null                                 |
+|explanation |text       |not:null                                 |
+|category_id |integer    |not:null                                 |
+|state_id    |integer    |not:null                                 |
+|send_fee_id |integer    |not:null                                 |
+|region_id   |integer    |not:null                                 |
+|wait_days_id|integer    |not:null                                 |
+|value       |integer    |not:null                                 |
+|user        |references |foreign_key :true                        |
 
 ### Associations
     belongs_to :user
@@ -37,7 +36,7 @@
 |Column       |Type       |Options                                  |
 |-------------|-----------|-----------------------------------------|
 |postal_code  |string     |not:null                                 |
-|prefecture   |string     |not:null                                 |
+|prefecture_id|integer    |not:null                                 |
 |city         |string     |not:null                                 |
 |area         |string     |not:null                                 |
 |building     |text       |任意                                      |
