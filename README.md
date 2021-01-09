@@ -1,16 +1,15 @@
 ## Users
-|Column     |Type       |Options                                  |
-|-----------|-----------|-----------------------------------------|
-|nickname   |string     |not:null                                 |
-|email      |string     |not:null                                 |
-|pass       |string     |not:null                                 |
-|name11     |string     |not:null                                 |
-|name12     |string     |not:null                                 |
-|name21     |string     |not:null                                 |
-|name22     |string     |not:null                                 |
-|birth_y    |integer    |not:null                                 |
-|birth_m    |integer    |not:null                                 |
-|birth_d    |integer    |not:null                                 |
+|Column             |Type       |Options                                  |
+|-----------        |-----------|-----------------------------------------|
+|nickname           |string     |not:null                                 |
+|email              |string     |not:null, unique :true                   |
+|encrypted_password |string     |not:null                                 |
+|name_lc             |string     |not:null                                 |
+|name_gc             |string     |not:null                                 |
+|name_l             |string     |not:null                                 |
+|name_g             |string     |not:null                                 |
+|birth              |date       |not:null                                 |
+
 
 ### Associations
     has_many :items
@@ -19,7 +18,6 @@
 ## Items
 |Column     |Type       |Options                                  |
 |-----------|-----------|-----------------------------------------|
-|image      |           |ActiveStorageで実装                       |
 |name       |string     |not:null                                 |
 |explanation|text       |not:null                                 |
 |category   |string     |not:null                                 |
@@ -43,7 +41,8 @@
 |city         |string     |not:null                                 |
 |area         |string     |not:null                                 |
 |building     |text       |任意                                      |
-|Phone_number |string     |not:null                                 |
+|phone_number |string     |not:null                                 |
+|buy_record   |references |foreign_key :true                        |
 
 ### Associations
     belongs_to :buy_record
@@ -51,8 +50,6 @@
 ## Buy_recodes
 |Column       |Type       |Options                                  |
 |-------------|-----------|-----------------------------------------|
-|pay          |integer    |not:null                                 |
-|address      |references |foreign_key :true                        |
 |item         |references |foreign_key :true                        |
 |user         |references |foreign_key :true                        |
 
