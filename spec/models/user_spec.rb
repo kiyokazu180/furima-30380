@@ -17,10 +17,9 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors.full_messages).to include("Email can't be blank")
     end
-    it "メールアドレスが一意である" do
+    it "メールアドレスが一意でないといけない" do
       @user.email = "a@a"
       @user.valid?
-     # binding.pry
       expect(@user.errors.full_messages).to include()
     end
     it "メールアドレスに＠がないとダメ" do
@@ -83,5 +82,8 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors.full_messages).to include("Birth can't be blank")
     end
+    it "全て正常に入力されていれば保存される"
+      expect(@user).to be_valid
+    end  
   end
 end
