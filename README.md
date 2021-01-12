@@ -4,8 +4,8 @@
 |nickname           |string     |not:null                                 |
 |email              |string     |not:null, unique :true                   |
 |encrypted_password |string     |not:null                                 |
-|name_lc             |string     |not:null                                 |
-|name_gc             |string     |not:null                                 |
+|name_lc            |string     |not:null                                 |
+|name_gc            |string     |not:null                                 |
 |name_l             |string     |not:null                                 |
 |name_g             |string     |not:null                                 |
 |birth              |date       |not:null                                 |
