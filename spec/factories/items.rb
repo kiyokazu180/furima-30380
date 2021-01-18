@@ -9,6 +9,4 @@ FactoryBot.define do
     wait_day_id = 2
     value = 2000
   end
-    
-  end
 end

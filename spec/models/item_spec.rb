@@ -15,12 +15,12 @@ RSpec.describe Item, type: :model do
       it "名前が空では登録できない" do
         @item.name= ""
       @item.valid?
-      expect(@item.errors.full_messages).to include("Nickname can't be blank")
+      expect(@item.errors.full_messages).to include("Name can't be blank")
       end
       it "説明文が空では登録できない" do
         @item.exoplanation = ""
       @item.valid?
-      expect(@item.errors.full_messages).to include("Nickname can't be blank")
+      expect(@item.errors.full_messages).to include("Exoplanation can't be blank")
       end
       it "カテゴリーが空では登録できない" do
         @item.category_id = ""
