@@ -20,5 +20,5 @@ class Item < ApplicationRecord
   validates :value
   end
   validates :value, inclusion: {in: 300..9999999}
-  validates :value, numericality: true
+  validates :value, numericality: { only_integer: true }
 end
