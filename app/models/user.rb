@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_many :buy_records
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   validates :nickname, :name_lc, :name_gc, :name_l, :name_g, :birth, presence: true
