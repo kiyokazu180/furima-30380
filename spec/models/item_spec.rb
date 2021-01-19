@@ -68,6 +68,10 @@ RSpec.describe Item, type: :model do
       expect(@item.errors.full_messages).to include("Value is not a number")
       end
     end
+    context "登録成功時" do
+      it "正常の入力により登録可能である" do
+      expect(@item).to be_valid 
+    end
   end
 
 end

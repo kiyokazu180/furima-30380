@@ -14,7 +14,7 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @item = Item.create(strong_method)
+    @item = Item.new(strong_method)
     if @item.save
       redirect_to root_path
     else
