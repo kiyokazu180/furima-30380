@@ -3,6 +3,8 @@ class CreateBuyRecords < ActiveRecord::Migration[6.0]
     create_table :buy_records do |t|
 
       t.timestamps
+      t.references :item, foreign_key: true
+      t.references :user, foreign_key: true
     end
   end
 end
