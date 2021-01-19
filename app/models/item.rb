@@ -1,5 +1,6 @@
 class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
+  has_one :buy_reecord
   belongs_to :user
   belongs_to :genre
   belongs_to :state
