@@ -53,7 +53,12 @@ RSpec.describe Item, type: :model do
       expect(@item.errors.full_messages).to include("Value can't be blank", "Value is not included in the list", "Value is not a number")
       end
       it "価格が範囲内でないと登録できない" do
-        @item.value = 200
+        @item.value = 299
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Value is not included in the list")
+      end
+      it "価格が範囲内でないと登録できない" do
+        @item.value = 10000000
       @item.valid?
       expect(@item.errors.full_messages).to include("Value is not included in the list")
       end

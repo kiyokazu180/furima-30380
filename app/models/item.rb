@@ -6,15 +6,19 @@ class Item < ApplicationRecord
   belongs_to :region
   belongs_to :wait_day
   has_one_attached :image
-  validates :category_id, numericality: { other_than: 1 }
-  validates :state_id,    numericality: { other_than: 1 }
-  validates :region_id,   numericality: { other_than: 1 }
-  validates :wait_day_id, numericality: { other_than: 1 }
-  validates :send_fee_id, numericality: { other_than: 1 }
-  validates :image,         presence: true
-  validates :name,          presence: true
-  validates :exoplanation,  presence: true
-  validates :value,         presence: true
+  with_options numericality: { other_than: 1 } do
+  validates :category_id
+  validates :state_id
+  validates :region_id
+  validates :wait_day_id
+  validates :send_fee_id
+  end
+  with_options presence: true do
+  validates :image
+  validates :name
+  validates :exoplanation
+  validates :value
+  end
   validates :value, inclusion: {in: 300..9999999}
   validates :value, numericality: true
 end
