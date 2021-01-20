@@ -1,6 +1,11 @@
 class ItemsController < ApplicationController
 
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :move_index, only: [:edit, :destroy]
+  before_action :move_top_a, only: [:edit, :destroy]
+  before_action :move_top_b, only: [:edit, :destroy]
+
+
 
 
   def index
@@ -20,6 +25,7 @@ class ItemsController < ApplicationController
     if @item.update(item_method)
        redirect_to root_path
     else
+       render :edit
     end
   end
 
@@ -49,6 +55,27 @@ class ItemsController < ApplicationController
   def item_method
     params.permit(:name, :exoplanation, :category_id, :state_id, :send_fee_id, :region_id, :wait_day_id, :value, :image, :id).merge(user_id:current_user.id)
   end
+
+  def move_index
+    unless user_signed_in?
+      redirect_to action: :index
+    end
+  end  
+
+  def move_top_a
+    @item = Item.find(params[:id])
+    if user_signed_in? && current_user.id != @item.user_id
+      redirect_to root_path
+    end
+  end
+
+  def move_top_b
+    @item = Item.find(params[:id])
+    if user_signed_in? && BuyRecord.exists?(item_id: @item.id)
+      redirect_to root_path
+    end
+  end  
+
 end
 
  
