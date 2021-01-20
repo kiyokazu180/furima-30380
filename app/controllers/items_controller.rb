@@ -7,7 +7,25 @@ class ItemsController < ApplicationController
     @items = Item.all.order('created_at DESC')
   end
 
+  def destroy
+
+  end
+  
+  # def edit
+  #   @item = Item.find(params[:id])
+  # end  
+
+  # def update
+  #   @item = Item.find(params[:id])
+  #   if @item.update(strong_method)
+  #      redirect_to edit_item_path(@item.id)
+  #   else
+  #      render :edit
+  #   end
+  # end
+
   def show
+    @item = Item.find(params[:id])
   end
 
   def new
