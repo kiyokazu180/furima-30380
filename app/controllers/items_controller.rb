@@ -3,8 +3,8 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :move_index, only: [:edit, :destroy]
   before_action :move_top_a, only: [:edit, :destroy]
-  before_action :move_top_b, only: [:edit, :destroy]
-
+  # before_action :move_top_b, only: [:edit, :destroy]
+  before_action :set_item,   only: [:edit, :update]
 
 
 
@@ -17,11 +17,9 @@ class ItemsController < ApplicationController
   end
   
   def edit
-    @item = Item.find(params[:id])
   end  
 
   def update
-    @item = Item.find(params[:id])
     if @item.update(strong_method)
        redirect_to root_path
     else
@@ -65,12 +63,16 @@ class ItemsController < ApplicationController
     end
   end
 
-  def move_top_b
+  # def move_top_b
+  #   @item = Item.find(params[:id])
+  #   if user_signed_in? && BuyRecord.exists?(item_id: @item.id)
+  #     redirect_to root_path
+  #   end
+  # end  
+
+  def set_item
     @item = Item.find(params[:id])
-    if user_signed_in? && BuyRecord.exists?(item_id: @item.id)
-      redirect_to root_path
-    end
-  end  
+  end
 
 end
 
