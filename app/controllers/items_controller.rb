@@ -11,18 +11,17 @@ class ItemsController < ApplicationController
 
   end
   
-  # def edit
-  #   @item = Item.find(params[:id])
-  # end  
+  def edit
+    @item = Item.find(params[:id])
+  end  
 
-  # def update
-  #   @item = Item.find(params[:id])
-  #   if @item.update(strong_method)
-  #      redirect_to edit_item_path(@item.id)
-  #   else
-  #      render :edit
-  #   end
-  # end
+  def update
+    @item = Item.find(params[:id])
+    if @item.update(item_method)
+       redirect_to root_path
+    else
+    end
+  end
 
   def show
     @item = Item.find(params[:id])
@@ -45,6 +44,10 @@ class ItemsController < ApplicationController
   private
   def strong_method
     params.require(:item).permit(:name, :exoplanation, :category_id, :state_id, :send_fee_id, :region_id, :wait_day_id, :value, :image, :id).merge(user_id:current_user.id)
+  end
+  
+  def item_method
+    params.permit(:name, :exoplanation, :category_id, :state_id, :send_fee_id, :region_id, :wait_day_id, :value, :image, :id).merge(user_id:current_user.id)
   end
 end
 
