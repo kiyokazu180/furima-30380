@@ -12,7 +12,6 @@
       <div class='sold-out'>
         <span>Sold Out!!</span>
       </div>
-      <% else %>
       <% end %>
     </div>
     <div class="item-price-box">
@@ -24,19 +23,15 @@
       </span>
     </div>
 
-    <% if user_signed_in? && current_user.id == @item.user_id %>
-      <% if BuyRecord.exists?(item_id: @item.id) %>
-      <% else %>
+    <% if BuyRecord.exists?(item_id: @item.id) %>
+    <% else %>
+      <% if user_signed_in? && current_user.id == @item.user_id %>
       <%= link_to '商品の編集', edit_item_path(@item.id), method: :get, class: "item-red-btn" %>
       <p class='or-text'>or</p>
       <%= link_to '削除', item_path(@item.id), method: :delete, class:'item-destroy' %>
-      <% end %>
-    <% elsif user_signed_in? && current_user.id != @item.user_id %>
-      <% if BuyRecord.exists?(item_id: @item.id) %>
-      <% else %>
+      <% elsif user_signed_in? %>
       <%= link_to '購入画面に進む', "#" ,class:"item-red-btn"%>
       <% end %>
-    <% else %>
     <% end %>
 
     <div class="item-explain-box">
