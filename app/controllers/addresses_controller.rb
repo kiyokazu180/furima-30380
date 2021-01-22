@@ -1,5 +1,5 @@
 class AddressesController < ApplicationController
-  def new
+  def index
     @item = Item.find(params[:id])
     @address = Address.new
   end  
@@ -18,15 +18,15 @@ class AddressesController < ApplicationController
   private
     
   def address_params
-    params.require(:address).permit(:postal_code, :region_id, :area, :building, :city, :phone_number).merge(token: params[:token])
+    params.require(:address).permit(:postal_code, :region_id, :area, :building, :city, :phone_number).merge(token: params[:token], user_id:current_user.id, item_id:@item.id)
   end  
 
   def pay_item
-    Payjp.api_key = EVN["PAYJP_SECRET_KEY"]  # 自身のPAY.JPテスト秘密鍵を記述しましょう
+    Payjp.api_key = EVN["PAYJP_SECRET_KEY"]
     Payjp::Charge.create(
-      amount: address_params[:price],  # 商品の値段
-      card: address_params[:token],    # カードトークン
-      currency: 'jpy'                 # 通貨の種類（日本円）
+      amount: address_params[:price],  
+      card: address_params[:token],    
+      currency: 'jpy'                 
     )
   end
 
