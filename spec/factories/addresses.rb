@@ -4,7 +4,7 @@ FactoryBot.define do
     region_id     {2}
     city          {"福岡市西区"}
     area          {3-11-22}
-    phone_number  {09011112222}
+    phone_number  {11111112222}
     
   end
 end

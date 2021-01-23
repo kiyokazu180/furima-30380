@@ -10,9 +10,11 @@ class AddressesController < ApplicationController
 
   def create
     @address = Address.new(address_params)
+    @buy_record = BuyRecord.new(buy_params)
     if @address.valid?
       pay_item
       @address.save
+      @buy_record.save
       return redirect_to root_path
     else
       render :index
@@ -24,6 +26,10 @@ class AddressesController < ApplicationController
   def address_params
     params.require(:address).permit(:postal_code, :region_id, :area, :building, :city, :phone_number).merge(token: params[:token], user_id:current_user.id, item_id:@item.id)
   end  
+
+  def buy_params
+    params.require(:buy_record).merge(user_id:current_user.id, item_id:@item.id)
+  end
 
   def move_top_a
     @item = Item.find(params[:id])
