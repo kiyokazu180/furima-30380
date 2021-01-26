@@ -8,13 +8,13 @@ const pay = () => {
     const formData = new FormData(formResult);
 
     const card = {
-      number: formData.get("number"),
-      sec: formData.get("sec"),
-      month: formData.get("month"),
-      year: `20${formData.get("year")}`,
+      number: formData.get("get_item[number]"),
+      cvc: formData.get("get_item[sec]"),
+      exp_month: formData.get("get_item[month]"),
+      exp_year: `20${formData.get("get_item[year]")}`,
     };
-
     Payjp.createToken(card, (status, response) => {
+      console.log(response)
       if (status == 200) {
         const token = response.id;
         const renderDom = document.getElementById("charge-form");
@@ -22,13 +22,12 @@ const pay = () => {
         renderDom.insertAdjacentHTML("beforeend", tokenObj);
       }
 
-      document.getElementById("order_number").removeAttribute("name");
-      document.getElementById("order_sec").removeAttribute("name");
-      document.getElementById("order_month").removeAttribute("name");
-      document.getElementById("order_year").removeAttribute("name");
+      document.getElementById("card-number").removeAttribute("name");
+      document.getElementById("card-exp-month").removeAttribute("name");
+      document.getElementById("card-exp-year").removeAttribute("name");
+      document.getElementById("card-cvc").removeAttribute("name");
 
       document.getElementById("charge-form").submit();
-
     });
   });
 };

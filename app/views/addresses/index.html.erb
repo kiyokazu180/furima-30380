@@ -26,17 +26,18 @@
         支払金額
       </h1>
       <p class='item-payment-price'>
-        ¥<%= "販売価格" %>
+        ¥<%= "#{@item.value}" %>
       </p>
     </div>
     <%# /支払額の表示 %>
 
-    <%= form_with url: addresses_path, local: true, id: 'charge-form', class: 'transaction-form-wrap' do |f| %>
+    <%= form_with model: @get_item, url: item_addresses_path(@item.id), method: :post, local: true, id: 'charge-form', class: 'transaction-form-wrap' do |f| %>
     <%# カード情報の入力 %>
-    <div class='credit-card-form'>
+    <div class='credit-card-form' id='charge-form'>
       <h1 class='info-input-haedline'>
         クレジットカード情報入力
       </h1>
+      <%= render 'shared/error_messages', model: f.object %>
       <div class="form-group">
         <div class='form-text-wrap'>
           <label class="form-text">カード情報</label>

@@ -4,53 +4,49 @@ class AddressesController < ApplicationController
   before_action :move_top_b, only: [:index]
 
   def index
-    @item = Item.find(params[:id])
-    @address = Address.new
+    @item = Item.find(params[:item_id])
+    @get_item = GetItem.new
   end  
 
   def create
-    @address = Address.new(address_params)
-    @buy_record = BuyRecord.new(buy_params)
-    if @address.valid?
+    @item = Item.find(params[:item_id])
+    @get_item = GetItem.new(get_params)
+    if @get_item.valid?
       pay_item
-      @address.save
-      @buy_record.save
-      return redirect_to root_path
+      @get_item.save
+      redirect_to root_path
     else
       render :index
-    end  
+    end
   end
   
   private
     
-  def address_params
-    params.require(:address).permit(:postal_code, :region_id, :area, :building, :city, :phone_number).merge(token: params[:token], user_id:current_user.id, item_id:@item.id)
-  end  
-
-  def buy_params
-    params.require(:buy_record).merge(user_id:current_user.id, item_id:@item.id)
+  def get_params
+    params.require(:get_item).permit(:postal_code, :region_id, :area, :building, :city, :phone_number).merge(token: params[:token], user_id:current_user.id, item_id:params[:item_id])
   end
 
   def move_top_a
-    @item = Item.find(params[:id])
+    @item = Item.find(params[:item_id])
     if user_signed_in? && @item.user_id == current_user.id
       redirect_to root_path
-    end  
-  end    
+    end
+  end
 
   def move_top_b
-    @item = Item.find(params[:id])
+    @item = Item.find(params[:item_id])
     if user_signed_in? && BuyRecord.exists?(item_id: @item.id)
       redirect_to root_path
     end  
   end
 
   def pay_item
-    Payjp.api_key = EVN["PAYJP_SECRET_KEY"]
+    @item = Item.find(params[:item_id])
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
     Payjp::Charge.create(
-      amount: address_params[:price],  
-      card: address_params[:token],    
-      currency: 'jpy'                 
+      amount: @item.value,  
+      card: get_params[:token],    
+      currency: 'jpy'
     )
   end
 
