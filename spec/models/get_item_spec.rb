@@ -12,6 +12,16 @@ RSpec.describe GetItem, type: :model do
         @get_item.valid?
         expect(@get_item.errors.full_messages).to include("Token can't be blank") 
       end
+      it "ユーザーが空だと購入できない" do
+        @get_item.user_id = nil
+        @get_item.valid?
+        expect(@get_item.errors.full_messages).to include("User can't be blank") 
+      end
+      it "アイテムが空だと購入できない" do
+        @get_item.item_id = nil
+        @get_item.valid?
+        expect(@get_item.errors.full_messages).to include("Item can't be blank") 
+      end
       it "郵便番号が空だと購入できない" do
         @get_item.postal_code = nil
         @get_item.valid?

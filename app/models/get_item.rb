@@ -9,6 +9,8 @@ class GetItem
   end
   with_options presence: true do
     validates :token
+    validates :user_id
+    validates :item_id
     validates :region_id
     validates :postal_code
     validates :city
