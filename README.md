@@ -36,7 +36,7 @@
 |Column       |Type       |Options                                  |
 |-------------|-----------|-----------------------------------------|
 |postal_code  |string     |not:null                                 |
-|prefecture_id|integer    |not:null                                 |
+|region_id    |integer    |not:null                                 |
 |city         |string     |not:null                                 |
 |area         |string     |not:null                                 |
 |building     |text       |任意                                      |
