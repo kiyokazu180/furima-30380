@@ -67,6 +67,10 @@ RSpec.describe GetItem, type: :model do
       it "全てが入力されてれば登録できる" do
         expect(@get_item).to be_valid
       end
+      it "建物が入力されてなくても登録できる" do
+        @get_item.building = nil
+        expect(@get_item).to be_valid
+      end
     end
   end  
 end
