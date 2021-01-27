@@ -17,8 +17,8 @@ class GetItem
   end
   
   def save
-    Address.create(postal_code: postal_code, region_id: region_id, city: city, area: area, building: building, phone_number: phone_number)
-    BuyRecord.create(user_id: user_id, item_id: item_id)
+    @buy_record = BuyRecord.create(user_id: user_id, item_id: item_id)
+    Address.create(postal_code: postal_code, region_id: region_id, city: city, area: area, building: building, phone_number: phone_number, buy_record_id: @buy_record.id)
   end
 
 end

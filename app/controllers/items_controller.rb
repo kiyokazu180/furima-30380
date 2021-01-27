@@ -12,11 +12,10 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-
   end
   
   def edit
-  end  
+  end
 
   def update
     if @item.update(strong_method)
@@ -61,12 +60,10 @@ class ItemsController < ApplicationController
     if user_signed_in? && BuyRecord.exists?(item_id: @item.id)
       redirect_to root_path
     end
-  end  
+  end
 
   def set_item
     @item = Item.find(params[:id])
   end
 
 end
-
- 
